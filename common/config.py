@@ -13,8 +13,39 @@ import sys
 import os
 import re
 
+IMAGE_NAME = 'home_page.png'
 
-def _get_screen_size():
+# 打开决斗
+CLICK_DUEL_BUTTON_EVENT = '''
+/dev/input/event3: 0003 0039 000007c5
+/dev/input/event3: 0001 014a 00000001
+/dev/input/event3: 0003 0035 00000624
+/dev/input/event3: 0003 0036 000003c8
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0039 ffffffff
+/dev/input/event3: 0001 014a 00000000
+/dev/input/event3: 0000 0000 00000000
+'''
+
+# 开始战斗
+START_FIGHT_EVENT = '''
+/dev/input/event3: 0003 0039 000007c6
+/dev/input/event3: 0001 014a 00000001
+/dev/input/event3: 0003 0035 0000048c
+/dev/input/event3: 0003 0036 000003db
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0039 ffffffff
+/dev/input/event3: 0001 014a 00000000
+/dev/input/event3: 0000 0000 00000000
+'''
+
+# 打一套连招
+COMBO_EVENT = '''
+
+'''
+
+
+def get_screen_size():
     """
     获取手机屏幕大小
     """

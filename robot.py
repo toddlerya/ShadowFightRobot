@@ -3,7 +3,7 @@
 # @Time     : 3/20/21 10:44 PM
 # @Author   : toddlerya 
 # @FileName : robot.py
-# @Project  : ShadowFightRobot
+# @Project  : shadow_fightRobot
 
 
 import subprocess
@@ -11,55 +11,67 @@ import sys
 import os
 import time
 
+from loguru import logger
 from PIL import Image
 
-from common.config import _get_screen_size
+from common.config import get_screen_size, IMAGE_NAME, CLICK_DUEL_BUTTON_EVENT, START_FIGHT_EVENT
 from setting import *
 
 
-screenshot_way = 2
+class EventManager:
+    def __init__(self):
+        self.click_duel_button_event_cmd_list = list()
+        self.start_fight_button_event_cmd_list = list()
+
+    @staticmethod
+    def __set_event(event):
+        for line in event.strip().split('\n'):
+            __send_event_cmd = f"sendevent {line.replace(':', '')}"
+            yield __send_event_cmd
+
+    def loader(self):
+        """
+        加载并构建sendevent命令
+        """
+        self.click_duel_button_event_cmd_list = [ele for ele in self.__set_event(CLICK_DUEL_BUTTON_EVENT)]
+        self.start_fight_button_event_cmd_list = [ele for ele in self.__set_event(START_FIGHT_EVENT)]
+
+    def sender(self, event_name):
+        """
+        执行sendevent命令
+        """
+        if event_name == CLICK_DUEL_BUTTON_EVENT:
+            for cmd in self.click_duel_button_event_cmd_list:
+                adb_shell(cmd)
+                time.sleep(0.1)
+        if event_name == START_FIGHT_EVENT:
+            for cmd in self.start_fight_button_event_cmd_list:
+                adb_shell(cmd)
 
 
-def pull_screenshot_temp():
-    """
-    获取临时
-    :return:
-    """
-    process = subprocess.Popen('adb shell screencap -p', shell=True, stdout=subprocess.PIPE)
-    screenshot = process.stdout.read()
-    if sys.platform == 'win32':
-        screenshot = screenshot.replace(b'\r\r\n', b'\n')
-    f = open('shadowfight_temp.png', 'wb')
-    f.write(screenshot)
-    f.close()
-
-
+@logger.catch
 def pull_screenshot():
-    process = subprocess.Popen('adb shell screencap -p', shell=True, stdout=subprocess.PIPE)
-    screenshot = process.stdout.read()
-    if sys.platform == 'win32':
-        screenshot = screenshot.replace(b'\r\r\n', b'\n')
-    f = open('shadowfight.png', 'wb')
-    f.write(screenshot)
-    f.close()
+    temp_path = '/data/local/tmp/'
+    subprocess.check_output(f'adb shell screencap -p {temp_path}/{IMAGE_NAME}', shell=True)
+    subprocess.check_output(f'adb pull {temp_path}/{IMAGE_NAME} .', shell=True)
 
 
+@logger.catch
 def check_screenshot():
     """
     检查获取截图的方式
     """
-    global screenshot_way
-    if os.path.isfile('shadowfight.png'):
-        os.remove('shadowfight.png')
-    if (screenshot_way < 0):
-        print('暂不支持当前设备')
-        sys.exit()
-    pull_screenshot()
+    logger.info('检查获取截图功能...')
+    if os.path.isfile(IMAGE_NAME):
+        os.remove(IMAGE_NAME)
     try:
-        Image.open('./shadowfight.png').load()
-        print('采用方式 {} 获取截图'.format(screenshot_way))
-    except Exception:
-        screenshot_way -= 1
+        pull_screenshot()
+    except Exception as err:
+        logger.error(f'无法执行adb shell截图: {err}')
+    try:
+        Image.open('tag_images/home_page.png').load()
+    except Exception as err:
+        logger.error(f'无法读取截图数据: {err}')
         check_screenshot()
 
 
@@ -94,17 +106,25 @@ def long_tap(point, delay=2000):
         return False
 
 
+@logger.catch
 def adb_shell(cmd):
     """
     长按
     :param cmd:
     :return:
     """
-    status = os.system('adb shell "{}"'.format(cmd))
-    if status == 0:
-        return True
-    else:
-        return False
+    __cmd = f'adb shell {cmd}'
+    logger.info(__cmd)
+    status = subprocess.check_output(__cmd, shell=True)
+
+
+def click_duel_button():
+    """
+    点击开始决斗按钮
+    """
+    for line in CLICK_DUEL_BUTTON_EVENT:
+        print(repr(line))
+        adb_shell(f"sendevent {line.replace(':', '')}")
 
 
 def front_fist_fist():
@@ -142,5 +162,8 @@ def fight():
 
 if __name__ == '__main__':
     check_screenshot()
+    em = EventManager()
+    em.loader()
+    em.sender(CLICK_DUEL_BUTTON_EVENT)
     # entry_week_job()
-    fight()
+    # fight()
