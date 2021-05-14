@@ -6,26 +6,37 @@
 # @Project  : shadow_fightRobot
 
 
-import subprocess
-import sys
 import os
 import time
+import glob
+import pathlib
+
 
 from loguru import logger
 from PIL import Image
+from apscheduler.schedulers.background import BlockingScheduler
 
-from common.config import get_screen_size, IMAGE_NAME, CLICK_DUEL_BUTTON_EVENT, START_FIGHT_EVENT
-from setting import *
+from config import IMAGE_NAME, ANNOTATION_IMAGE_PATH
+from config.event_config import *
+from utils.trans import hex2dec
+from utils.operate import adb_shell, pull_screenshot
+from utils.image import read_image, ssim_score
 
 
 class EventManager:
     def __init__(self):
+        self.open_game_event_cmd_list = list()
+        self.close_shop_ad_event_cmd_list = list()
+        self.close_new_season_event_cmd_list = list()
         self.click_duel_button_event_cmd_list = list()
         self.start_fight_button_event_cmd_list = list()
+        self.ann_images = list()
+        self.running_event = None
 
     @staticmethod
     def __set_event(event):
         for line in event.strip().split('\n'):
+            line = hex2dec(line)
             __send_event_cmd = f"sendevent {line.replace(':', '')}"
             yield __send_event_cmd
 
@@ -33,27 +44,70 @@ class EventManager:
         """
         加载并构建sendevent命令
         """
-        self.click_duel_button_event_cmd_list = [ele for ele in self.__set_event(CLICK_DUEL_BUTTON_EVENT)]
-        self.start_fight_button_event_cmd_list = [ele for ele in self.__set_event(START_FIGHT_EVENT)]
+        self.open_game_event_cmd_list = [ele for ele in self.__set_event(OPEN_GAME_EVENT['value'])]
+        self.close_shop_ad_event_cmd_list = [ele for ele in self.__set_event(CLOSE_SHOP_AD_EVENT['value'])]
+        self.close_new_season_event_cmd_list = [ele for ele in self.__set_event(CLOSE_NEW_SEASON_DIALOG_EVENT['value'])]
+        self.click_duel_button_event_cmd_list = [ele for ele in self.__set_event(CLICK_DUEL_BUTTON_EVENT['value'])]
+        self.start_fight_button_event_cmd_list = [ele for ele in self.__set_event(CLICK_START_FIGHT_BUTTON_EVENT['value'])]
+        self.ann_images = glob.glob(f'{str(pathlib.Path(ANNOTATION_IMAGE_PATH).absolute())}/*.png')
 
     def sender(self, event_name):
         """
         执行sendevent命令
         """
-        if event_name == CLICK_DUEL_BUTTON_EVENT:
+        logger.info(f'sendevent {event_name}')
+        if event_name == '打开游戏':
+            for cmd in self.open_game_event_cmd_list:
+                adb_shell(cmd)
+            time.sleep(60)
+        if event_name == '关闭商店活动广告':
+            for cmd in self.close_shop_ad_event_cmd_list:
+                adb_shell(cmd)
+            time.sleep(5)
+        if event_name == '打开决斗':
             for cmd in self.click_duel_button_event_cmd_list:
                 adb_shell(cmd)
-                time.sleep(0.1)
-        if event_name == START_FIGHT_EVENT:
+            time.sleep(30)
+        if event_name == '开始战斗':
             for cmd in self.start_fight_button_event_cmd_list:
                 adb_shell(cmd)
+            time.sleep(10)
 
+    def chose_event(self):
+        """
+        根据当前屏幕图像，匹配图片事件标记，选择执行的事件
+        """
+        max_score = 0.0
+        similarity_img = ''
+        for each in self.ann_images:
+            temp_image_name = pathlib.Path(each).name
+            temp_img = read_image(IMAGE_NAME)
+            each_ann_img = read_image(each)
+            __score = ssim_score(img_1=temp_img, img_2=each_ann_img)
+            logger.info(f'当前正在比对标注图片: {temp_image_name} {__score}')
+            if __score > max_score:
+                max_score = __score
+                similarity_img = temp_image_name
+        recommend_event = annotation_event_map[similarity_img]
+        logger.info(f'推荐事件: {recommend_event["desc"]}, 匹配成功图片: {similarity_img}, 相似度: {max_score}')
+        return recommend_event
 
-@logger.catch
-def pull_screenshot():
-    temp_path = '/data/local/tmp/'
-    subprocess.check_output(f'adb shell screencap -p {temp_path}/{IMAGE_NAME}', shell=True)
-    subprocess.check_output(f'adb pull {temp_path}/{IMAGE_NAME} .', shell=True)
+    def run_event(self):
+        """
+        执行事件
+        """
+        __event = self.chose_event()
+        __event_desc = __event['desc']
+        if self.running_event is None:
+            logger.info(f'开始执行事件: {__event_desc}')
+            self.sender(__event_desc)
+            # if __event == COMBO_EVENT:
+            #     self.running_event = __event
+            #     time.sleep(10)
+        else:
+            __event = self.chose_event()
+            logger.info(f'开始执行事件: {__event_desc}')
+            self.sender(__event_desc)
 
 
 @logger.catch
@@ -69,101 +123,32 @@ def check_screenshot():
     except Exception as err:
         logger.error(f'无法执行adb shell截图: {err}')
     try:
-        Image.open('tag_images/home_page.png').load()
+        Image.open('annotation_images/game_home_page.png').load()
     except Exception as err:
         logger.error(f'无法读取截图数据: {err}')
         check_screenshot()
 
 
-def short_tap(point):
-    """
-    点击
-    :param point:
-    :return:
-    """
-    x = point.get('x')
-    y = point.get('y')
-    status = os.system('adb shell input tap {X} {Y}'.format(X=x, Y=y))
-    if status == 0:
-        return True
-    else:
-        return False
-
-
-def long_tap(point, delay=2000):
-    """
-    长按
-    :param point:
-    :param delay:
-    :return:
-    """
-    x = point.get('x')
-    y = point.get('y')
-    status = os.system('adb shell input touchscreen swipe {X} {Y} {X} {Y} {TIME}'.format(X=x, Y=y, TIME=delay))
-    if status == 0:
-        return True
-    else:
-        return False
-
-
-@logger.catch
-def adb_shell(cmd):
-    """
-    长按
-    :param cmd:
-    :return:
-    """
-    __cmd = f'adb shell {cmd}'
-    logger.info(__cmd)
-    status = subprocess.check_output(__cmd, shell=True)
-
-
-def click_duel_button():
-    """
-    点击开始决斗按钮
-    """
-    for line in CLICK_DUEL_BUTTON_EVENT:
-        print(repr(line))
-        adb_shell(f"sendevent {line.replace(':', '')}")
-
-
-def front_fist_fist():
-    """
-    前拳拳
-    :return:
-    """
-    adb_shell(FRONT_FIST_FIST)
-
-
-def entry_week_job():
-    """
-    进入每周活动
-    :return:
-    """
-    if short_tap(WEEK_JOB_POINT):
-        print('进入任务活动页面')
-        if short_tap(REGISTERED_JOB):
-            print('注册任务')
-            if short_tap(PAY_JOB):
-                print('付款成功')
-    else:
-        print('进入任务活动页面失败')
-
-
-def fight():
-    """
-    战斗
-    :return:
-    """
-    while True:
-        front_fist_fist()
-        time.sleep(0.01)
-
-
-if __name__ == '__main__':
+def run():
     check_screenshot()
     em = EventManager()
     em.loader()
-    em.sender(CLICK_DUEL_BUTTON_EVENT)
-    # entry_week_job()
-    # fight()
+
+    scheduler = BlockingScheduler()
+
+    scheduler.add_job(
+        pull_screenshot,
+        trigger='interval',
+        seconds=5
+    )
+    scheduler.add_job(
+        em.run_event,
+        trigger='interval',
+        seconds=10
+    )
+
+    scheduler.start()
+
+
+if __name__ == '__main__':
+    run()
