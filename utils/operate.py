@@ -48,7 +48,10 @@ def adb_shell(cmd):
     """
     __cmd = f'adb shell {cmd}'
     # logger.debug(__cmd)
-    subprocess.check_output(__cmd, shell=True)
+    try:
+        subprocess.run(__cmd, shell=True, check=True)
+    except Exception as err:
+        logger.exception(f'{__cmd}: {err}')
 
 
 def short_tap(point):
