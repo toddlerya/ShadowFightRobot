@@ -7,10 +7,10 @@
 
 
 CLICK_CONTINUE_BUTTON = '''
-/dev/input/event3: 0003 0039 00000012
+/dev/input/event3: 0003 0039 00000005
 /dev/input/event3: 0001 014a 00000001
-/dev/input/event3: 0003 0035 000006e1
-/dev/input/event3: 0003 0036 000003cd
+/dev/input/event3: 0003 0035 000006dd
+/dev/input/event3: 0003 0036 000003c2
 /dev/input/event3: 0000 0000 00000000
 /dev/input/event3: 0003 0039 ffffffff
 /dev/input/event3: 0001 014a 00000000
