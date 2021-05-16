@@ -31,6 +31,9 @@ class EventManager:
         self.click_duel_button_event_cmd_list = list()
         self.start_fight_button_event_cmd_list = list()
         self.combo_event_cmd_list = list()
+        self.end_fight_click_continue_event_cmd_list = list()
+        self.gold_details_click_continue_event_cmd_list = list()
+        self.receive_award_gold_click_continue_event_cmd_list = list()
         self.ann_images = list()
         self.running_event = None
 
@@ -51,6 +54,9 @@ class EventManager:
         self.click_duel_button_event_cmd_list = [ele for ele in self.__set_event(CLICK_DUEL_BUTTON_EVENT['value'])]
         self.start_fight_button_event_cmd_list = [ele for ele in self.__set_event(CLICK_START_FIGHT_BUTTON_EVENT['value'])]
         self.combo_event_cmd_list = [ele for ele in self.__set_event(COMBO_EVENT['value'])]
+        self.end_fight_click_continue_event_cmd_list = [ele for ele in self.__set_event(END_FIGHT_CLICK_CONTINUE_EVENT['value'])]
+        self.gold_details_click_continue_event_cmd_list = [ele for ele in self.__set_event(GOLD_DETAILS_CONTINUE_EVENT['value'])]
+        self.receive_award_gold_click_continue_event_cmd_list = [ele for ele in self.__set_event(RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT['value'])]
         self.ann_images = glob.glob(f'{str(pathlib.Path(ANNOTATION_IMAGE_PATH).absolute())}/*.png')
 
     def sender(self, event_name):
@@ -74,13 +80,26 @@ class EventManager:
             for cmd in self.start_fight_button_event_cmd_list:
                 adb_shell(cmd)
             time.sleep(3)
-            logger.info('开始攻击')
-            for i in range(30):
-                logger.info(f'第{i+1}次攻击')
-                for cmd in self.combo_event_cmd_list:
-                    adb_shell(cmd)
-                time.sleep(0.5)
+            self.fight()
+        if event_name == '结束战斗':
+            for cmd in self.end_fight_click_continue_event_cmd_list:
+                adb_shell(cmd)
+        if event_name == '展示金币明细':
+            for cmd in self.gold_details_click_continue_event_cmd_list:
+                adb_shell(cmd)
+        if event_name == '领取战斗金币奖励':
+            pass
 
+    @logger.catch
+    def fight(self):
+        logger.info('开始攻击')
+        for i in range(10):
+            logger.info(f'第{i + 1}次攻击')
+            for cmd in self.combo_event_cmd_list:
+                adb_shell(cmd)
+            time.sleep(1)
+
+    @logger.catch
     def chose_event(self):
         """
         根据当前屏幕图像，匹配图片事件标记，选择执行的事件
@@ -108,16 +127,8 @@ class EventManager:
         logger.info('调度执行事件')
         __event = self.chose_event()
         __event_desc = __event['desc']
-        if self.running_event is None:
-            logger.info(f'开始执行事件: {__event_desc}')
-            self.sender(__event_desc)
-            # if __event == COMBO_EVENT:
-            #     self.running_event = __event
-            #     time.sleep(10)
-        else:
-            __event = self.chose_event()
-            logger.info(f'开始执行事件: {__event_desc}')
-            self.sender(__event_desc)
+        logger.info(f'开始执行事件: {__event_desc}')
+        self.sender(__event_desc)
 
 
 @logger.catch
@@ -140,7 +151,6 @@ def check_screenshot():
 
 
 def run():
-    check_screenshot()
     em = EventManager()
     em.loader()
 
@@ -161,4 +171,5 @@ def run():
 
 
 if __name__ == '__main__':
+    check_screenshot()
     run()

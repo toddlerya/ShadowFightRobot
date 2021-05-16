@@ -6,13 +6,25 @@
 # @Project  : ShadowFightRobot
 
 
+CLICK_CONTINUE_BUTTON = '''
+/dev/input/event3: 0003 0039 00000012
+/dev/input/event3: 0001 014a 00000001
+/dev/input/event3: 0003 0035 000006e1
+/dev/input/event3: 0003 0036 000003cd
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0039 ffffffff
+/dev/input/event3: 0001 014a 00000000
+/dev/input/event3: 0000 0000 00000000
+'''
+
+
 # 打开游戏
 OPEN_GAME_EVENT = {
     'desc': '打开游戏',
     'value': '''
-/dev/input/event3: 0003 0039 00000017
+/dev/input/event3: 0003 0039 0000004d
 /dev/input/event3: 0001 014a 00000001
-/dev/input/event3: 0003 0035 00000669
+/dev/input/event3: 0003 0035 00000689
 /dev/input/event3: 0003 0036 000000e0
 /dev/input/event3: 0000 0000 00000000
 /dev/input/event3: 0003 0039 ffffffff
@@ -167,6 +179,22 @@ COMBO_EVENT = {
 '''
 }
 
+END_FIGHT_CLICK_CONTINUE_EVENT = {
+    'desc': '结束战斗',
+    'value': CLICK_CONTINUE_BUTTON
+}
+
+
+GOLD_DETAILS_CONTINUE_EVENT = {
+    'desc': '展示金币明细',
+    'value': CLICK_CONTINUE_BUTTON
+}
+
+
+RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT = {
+    'desc': '领取战斗金币奖励',
+    'value': CLICK_CONTINUE_BUTTON
+}
 
 
 annotation_event_map = {
@@ -176,4 +204,7 @@ annotation_event_map = {
     'game_home_page.png': CLICK_DUEL_BUTTON_EVENT,
     'wait_click_fight_button.png': CLICK_START_FIGHT_BUTTON_EVENT,
     'wait_close_new_season_dialog.png': CLOSE_NEW_SEASON_DIALOG_EVENT,
+    'end_fight_click_continue.png': END_FIGHT_CLICK_CONTINUE_EVENT,
+    'gold_detail_click_continue.png': GOLD_DETAILS_CONTINUE_EVENT,
+    'receive_award_gold_click_continue.png': RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT
 }
