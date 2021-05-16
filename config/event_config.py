@@ -81,10 +81,93 @@ CLICK_START_FIGHT_BUTTON_EVENT = {
 '''
 }
 
-# # 打一套连招
-# COMBO_EVENT = '''
-#
-# '''
+# 打一套连招
+COMBO_EVENT = {
+    'desc': '开始连招攻击',
+    'value': '''
+/dev/input/event3: 0003 0039 00000008
+/dev/input/event3: 0001 014a 00000001
+/dev/input/event3: 0003 003a 00000002
+/dev/input/event3: 0003 0035 000000b3
+/dev/input/event3: 0003 0036 00000371
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 002f 00000001
+/dev/input/event3: 0003 0039 00000009
+/dev/input/event3: 0003 003a 00000002
+/dev/input/event3: 0003 0035 000006ee
+/dev/input/event3: 0003 0036 00000338
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 002f 00000000
+/dev/input/event3: 0003 0035 000000b8
+/dev/input/event3: 0003 0036 00000372
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0035 000000bc
+/dev/input/event3: 0003 0036 00000373
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0035 000000e7
+/dev/input/event3: 0003 0036 00000372
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0035 00000101
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0035 0000011a
+/dev/input/event3: 0003 0036 00000371
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0035 00000134
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 002f 00000001
+/dev/input/event3: 0003 0039 ffffffff
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 002f 00000000
+/dev/input/event3: 0003 0036 00000372
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0035 00000135
+/dev/input/event3: 0003 0036 00000371
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0036 00000372
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 002f 00000001
+/dev/input/event3: 0003 0039 0000000a
+/dev/input/event3: 0003 0035 000006ed
+/dev/input/event3: 0003 0036 00000339
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 002f 00000000
+/dev/input/event3: 0003 0035 00000134
+/dev/input/event3: 0003 0036 00000371
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 002f 00000001
+/dev/input/event3: 0003 0039 ffffffff
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0039 0000000b
+/dev/input/event3: 0003 0035 000006ee
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0039 ffffffff
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0039 0000000c
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0039 ffffffff
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0039 0000000d
+/dev/input/event3: 0003 0036 00000338
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0039 ffffffff
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0039 0000000e
+/dev/input/event3: 0003 0036 00000339
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0039 ffffffff
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0039 0000000f
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 0039 ffffffff
+/dev/input/event3: 0000 0000 00000000
+/dev/input/event3: 0003 002f 00000000
+/dev/input/event3: 0003 0039 ffffffff
+/dev/input/event3: 0001 014a 00000000
+/dev/input/event3: 0000 0000 00000000
+'''
+}
+
+
 
 annotation_event_map = {
     'wait_open_game.png': OPEN_GAME_EVENT,

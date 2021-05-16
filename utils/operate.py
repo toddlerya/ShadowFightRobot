@@ -33,6 +33,7 @@ def get_screen_size():
 
 @logger.catch
 def pull_screenshot():
+    logger.info('获取当前屏幕截图')
     temp_path = '/data/local/tmp/'
     subprocess.check_output(f'adb shell screencap -p {temp_path}/{IMAGE_NAME}', shell=True)
     subprocess.check_output(f'adb pull {temp_path}/{IMAGE_NAME} .', shell=True)

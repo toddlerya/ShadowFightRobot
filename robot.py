@@ -30,6 +30,7 @@ class EventManager:
         self.close_new_season_event_cmd_list = list()
         self.click_duel_button_event_cmd_list = list()
         self.start_fight_button_event_cmd_list = list()
+        self.combo_event_cmd_list = list()
         self.ann_images = list()
         self.running_event = None
 
@@ -49,6 +50,7 @@ class EventManager:
         self.close_new_season_event_cmd_list = [ele for ele in self.__set_event(CLOSE_NEW_SEASON_DIALOG_EVENT['value'])]
         self.click_duel_button_event_cmd_list = [ele for ele in self.__set_event(CLICK_DUEL_BUTTON_EVENT['value'])]
         self.start_fight_button_event_cmd_list = [ele for ele in self.__set_event(CLICK_START_FIGHT_BUTTON_EVENT['value'])]
+        self.combo_event_cmd_list = [ele for ele in self.__set_event(COMBO_EVENT['value'])]
         self.ann_images = glob.glob(f'{str(pathlib.Path(ANNOTATION_IMAGE_PATH).absolute())}/*.png')
 
     def sender(self, event_name):
@@ -71,7 +73,13 @@ class EventManager:
         if event_name == '开始战斗':
             for cmd in self.start_fight_button_event_cmd_list:
                 adb_shell(cmd)
-            time.sleep(10)
+            time.sleep(3)
+            logger.info('开始攻击')
+            for i in range(30):
+                logger.info(f'第{i+1}次攻击')
+                for cmd in self.combo_event_cmd_list:
+                    adb_shell(cmd)
+                time.sleep(0.5)
 
     def chose_event(self):
         """
@@ -92,10 +100,12 @@ class EventManager:
         logger.info(f'推荐事件: {recommend_event["desc"]}, 匹配成功图片: {similarity_img}, 相似度: {max_score}')
         return recommend_event
 
+    @logger.catch
     def run_event(self):
         """
         执行事件
         """
+        logger.info('调度执行事件')
         __event = self.chose_event()
         __event_desc = __event['desc']
         if self.running_event is None:
@@ -139,12 +149,12 @@ def run():
     scheduler.add_job(
         pull_screenshot,
         trigger='interval',
-        seconds=5
+        seconds=2
     )
     scheduler.add_job(
         em.run_event,
         trigger='interval',
-        seconds=10
+        seconds=6
     )
 
     scheduler.start()
