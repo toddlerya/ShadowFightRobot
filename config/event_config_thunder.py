@@ -2,7 +2,7 @@
 # coding: utf-8
 # @Time     : 2021/5/14 22:21
 # @Author   : toddler
-# @FileName : event_config.py
+# @FileName : event_config_bs.py
 # @Project  : ShadowFightRobot
 
 
