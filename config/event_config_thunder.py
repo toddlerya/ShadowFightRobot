@@ -198,7 +198,7 @@ RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT = {
 
 
 annotation_event_map = {
-    'wait_open_game.png': OPEN_GAME_EVENT,
+    'thunder_wait_open_game.png': OPEN_GAME_EVENT,
     'wait_close_shop_ad.png': CLOSE_SHOP_AD_EVENT,
     # 通过这里控制参加哪个活动==>game_home_page
     'game_home_page.png': CLICK_DUEL_BUTTON_EVENT,
