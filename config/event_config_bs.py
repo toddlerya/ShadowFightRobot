@@ -7,14 +7,12 @@
 
 
 CLICK_CONTINUE_BUTTON = '''
-/dev/input/event3: 0003 0039 00000005
-/dev/input/event3: 0001 014a 00000001
-/dev/input/event3: 0003 0035 000006dd
-/dev/input/event3: 0003 0036 000003c2
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0039 ffffffff
-/dev/input/event3: 0001 014a 00000000
-/dev/input/event3: 0000 0000 00000000
+/dev/input/event6: 0003 0035 000077a2
+/dev/input/event6: 0003 0036 000073b3
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
 '''
 
 
@@ -22,12 +20,12 @@ CLICK_CONTINUE_BUTTON = '''
 OPEN_GAME_EVENT = {
     'desc': '打开游戏',
     'value': '''
-/dev/input/event7: 0003 0035 00005d9d
-/dev/input/event7: 0003 0036 00000e6e
-/dev/input/event7: 0000 0002 00000000
-/dev/input/event7: 0000 0000 00000000
-/dev/input/event7: 0000 0002 00000000
-/dev/input/event7: 0000 0000 00000000
+/dev/input/event6: 0003 0035 000035d6
+/dev/input/event6: 0003 0036 000012ea
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
 '''
 }
 
@@ -35,26 +33,24 @@ OPEN_GAME_EVENT = {
 CLOSE_SHOP_AD_EVENT = {
     'desc': '关闭商店活动广告',
     'value': '''
-/dev/input/event7: 0003 0035 0000042a
-/dev/input/event7: 0003 0036 000004c4
-/dev/input/event7: 0000 0002 00000000
-/dev/input/event7: 0000 0000 00000000
-/dev/input/event7: 0000 0002 00000000
-/dev/input/event7: 0000 0000 00000000
+/dev/input/event6: 0003 0035 0000048f
+/dev/input/event6: 0003 0036 00000509
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
 '''
 }
 
 CLOSE_NEW_SEASON_DIALOG_EVENT = {
     'desc': '关闭新赛季提示弹窗',
     'value': '''
-/dev/input/event3: 0003 0039 0000002d
-/dev/input/event3: 0001 014a 00000001
-/dev/input/event3: 0003 0035 0000058c
-/dev/input/event3: 0003 0036 0000032d
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0039 ffffffff
-/dev/input/event3: 0001 014a 00000000
-/dev/input/event3: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00005eaf
+/dev/input/event6: 0003 0036 0000602e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
 '''
 }
 
@@ -63,12 +59,12 @@ CLOSE_NEW_SEASON_DIALOG_EVENT = {
 CLICK_DUEL_BUTTON_EVENT = {
     'desc': '打开决斗',
     'value': '''
-/dev/input/event7: 0003 0035 00006c82
-/dev/input/event7: 0003 0036 000070f0
-/dev/input/event7: 0000 0002 00000000
-/dev/input/event7: 0000 0000 00000000
-/dev/input/event7: 0000 0002 00000000
-/dev/input/event7: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00006de3
+/dev/input/event6: 0003 0036 00007141
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
 '''
 }
 
@@ -76,12 +72,12 @@ CLICK_DUEL_BUTTON_EVENT = {
 CLICK_START_FIGHT_BUTTON_EVENT = {
     'desc': '开始战斗',
     'value': '''
-/dev/input/event7: 0003 0035 000041cc
-/dev/input/event7: 0003 0036 00007413
-/dev/input/event7: 0000 0002 00000000
-/dev/input/event7: 0000 0000 00000000
-/dev/input/event7: 0000 0002 00000000
-/dev/input/event7: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00004022
+/dev/input/event6: 0003 0036 000070a4
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
 '''
 }
 
@@ -89,85 +85,245 @@ CLICK_START_FIGHT_BUTTON_EVENT = {
 COMBO_EVENT = {
     'desc': '开始连招攻击',
     'value': '''
-/dev/input/event3: 0003 0039 00000008
-/dev/input/event3: 0001 014a 00000001
-/dev/input/event3: 0003 003a 00000002
-/dev/input/event3: 0003 0035 000000b3
-/dev/input/event3: 0003 0036 00000371
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 002f 00000001
-/dev/input/event3: 0003 0039 00000009
-/dev/input/event3: 0003 003a 00000002
-/dev/input/event3: 0003 0035 000006ee
-/dev/input/event3: 0003 0036 00000338
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 002f 00000000
-/dev/input/event3: 0003 0035 000000b8
-/dev/input/event3: 0003 0036 00000372
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0035 000000bc
-/dev/input/event3: 0003 0036 00000373
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0035 000000e7
-/dev/input/event3: 0003 0036 00000372
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0035 00000101
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0035 0000011a
-/dev/input/event3: 0003 0036 00000371
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0035 00000134
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 002f 00000001
-/dev/input/event3: 0003 0039 ffffffff
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 002f 00000000
-/dev/input/event3: 0003 0036 00000372
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0035 00000135
-/dev/input/event3: 0003 0036 00000371
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0036 00000372
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 002f 00000001
-/dev/input/event3: 0003 0039 0000000a
-/dev/input/event3: 0003 0035 000006ed
-/dev/input/event3: 0003 0036 00000339
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 002f 00000000
-/dev/input/event3: 0003 0035 00000134
-/dev/input/event3: 0003 0036 00000371
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 002f 00000001
-/dev/input/event3: 0003 0039 ffffffff
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0039 0000000b
-/dev/input/event3: 0003 0035 000006ee
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0039 ffffffff
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0039 0000000c
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0039 ffffffff
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0039 0000000d
-/dev/input/event3: 0003 0036 00000338
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0039 ffffffff
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0039 0000000e
-/dev/input/event3: 0003 0036 00000339
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0039 ffffffff
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0039 0000000f
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 0039 ffffffff
-/dev/input/event3: 0000 0000 00000000
-/dev/input/event3: 0003 002f 00000000
-/dev/input/event3: 0003 0039 ffffffff
-/dev/input/event3: 0001 014a 00000000
-/dev/input/event3: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00000cf7
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001734
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00000cf7
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001734
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00000cf7
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001734
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00000cf7
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001734
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00000cf7
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001734
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001734
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0003 0035 000075ef
+/dev/input/event6: 0003 0036 00005f02
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0003 0035 00001975
+/dev/input/event6: 0003 0036 0000664e
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
+/dev/input/event6: 0000 0002 00000000
+/dev/input/event6: 0000 0000 00000000
 '''
 }
 

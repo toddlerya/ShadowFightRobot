@@ -17,7 +17,7 @@ from PIL import Image
 from apscheduler.schedulers.background import BlockingScheduler
 
 from config import IMAGE_NAME, ANNOTATION_IMAGE_PATH
-from config.event_config_thunder import *
+from config.event_config_bs import *
 from utils.trans import hex2dec
 from utils.operate import adb_shell, pull_screenshot
 from utils.image import read_image, ssim_score
