@@ -73,13 +73,14 @@ class EventManager:
             time.sleep(5)
         if event_name == '打开决斗':
             adb_shell(self.click_duel_button_event_cmd)
-            time.sleep(15)
+            time.sleep(20)
         if event_name == '开始战斗':
             adb_shell(self.start_fight_button_event_cmd)
-            time.sleep(3)
+            time.sleep(5)
             self.fight()
         if event_name == '结束战斗':
             adb_shell(self.end_fight_click_continue_event_cmd)
+            time.sleep(5)
         if event_name == '展示金币明细':
             adb_shell(self.gold_details_click_continue_event_cmd)
         if event_name == '领取战斗金币奖励':
