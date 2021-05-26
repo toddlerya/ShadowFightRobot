@@ -8,12 +8,12 @@
 
 button_points = {
     'open_fight': {
-        'x': 1942,
-        'y': 920
+        'x': 2127,
+        'y': 940
     },
     'fist': {
-        'x': 2060,
-        'y': 730
+        'x': 2015,
+        'y': 720
     },
     'start_fight': {
         'x': 1201,
@@ -65,7 +65,8 @@ annotation_event_map = {
     'game_home_page.png': CLICK_DUEL_BUTTON_EVENT,
     'wait_click_fight_button.png': CLICK_START_FIGHT_BUTTON_EVENT,
     # 'wait_close_new_season_dialog.png': CLOSE_NEW_SEASON_DIALOG_EVENT,
-    'end_fight_click_continue.png': END_FIGHT_CLICK_CONTINUE_EVENT,
+    'end_fight_click_continue_hero.png': END_FIGHT_CLICK_CONTINUE_EVENT,
+    'end_fight_click_continue_champion.png': END_FIGHT_CLICK_CONTINUE_EVENT,
     'gold_detail_click_continue.png': GOLD_DETAILS_CONTINUE_EVENT,
     'receive_award_gold_click_continue.png': RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT
 }

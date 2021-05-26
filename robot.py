@@ -88,7 +88,7 @@ class EventManager:
     @logger.catch(reraise=True)
     def fight(self):
         logger.info('开始攻击')
-        for i in range(60):
+        for i in range(80):
             logger.info(f'第{i + 1}次攻击')
             adb_shell(self.combo_event_cmd)
             time.sleep(0.5)
