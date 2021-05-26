@@ -85,6 +85,8 @@ class EventManager:
             adb_shell(self.gold_details_click_continue_event_cmd)
         if event_name == '领取战斗金币奖励':
             adb_shell(self.receive_award_gold_click_continue_event_cmd)
+        if event_name == '开始攻击':
+            self.fight()
 
     @logger.catch(reraise=True)
     def fight(self):
