@@ -67,6 +67,7 @@ annotation_event_map = {
     # 'wait_close_new_season_dialog.png': CLOSE_NEW_SEASON_DIALOG_EVENT,
     'end_fight_click_continue_hero.png': END_FIGHT_CLICK_CONTINUE_EVENT,
     'end_fight_click_continue_champion.png': END_FIGHT_CLICK_CONTINUE_EVENT,
+    'end_fight_click_continue_master.png': END_FIGHT_CLICK_CONTINUE_EVENT,
     'gold_detail_click_continue.png': GOLD_DETAILS_CONTINUE_EVENT,
     'receive_award_gold_click_continue.png': RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT,
     'fighting.png': COMBO_EVENT
