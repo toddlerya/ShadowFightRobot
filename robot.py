@@ -93,11 +93,11 @@ class EventManager:
     @logger.catch
     def fight(self):
         logger.info('开始攻击')
-        for i in range(20):
+        for i in range(10):
             logger.info(f'第{i + 1}次攻击')
             for cmd in self.combo_event_cmd_list:
                 adb_shell(cmd)
-            time.sleep(1)
+            time.sleep(0.5)
 
     @logger.catch
     def chose_event(self):
