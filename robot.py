@@ -42,7 +42,7 @@ class EventManager:
 
     @staticmethod
     def __set_long_tap_event(event):
-        return f'input touchscreen swipe {event["x"]} {event["y"]} {event["x"]} {event["y"]} 500'
+        return f'input touchscreen swipe {event["x"]} {event["y"]} {event["x"]} {event["y"]} 100'
 
     def loader(self):
         """
@@ -93,7 +93,7 @@ class EventManager:
         for i in range(80):
             logger.info(f'第{i + 1}次攻击')
             adb_shell(self.combo_event_cmd)
-            time.sleep(0.5)
+            time.sleep(0.3)
 
     @logger.catch(reraise=True)
     def chose_event(self):
