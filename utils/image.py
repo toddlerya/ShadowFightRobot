@@ -29,9 +29,6 @@ def verify_image(image_path):
     return status
 
 
-
-
-
 @logger.catch(reraise=True)
 def read_image(image_path):
     return cv2.imread(image_path)

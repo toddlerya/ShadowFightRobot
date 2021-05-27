@@ -105,10 +105,9 @@ class EventManager:
         for each in self.ann_images:
             temp_image_name = pathlib.Path(each).name
             # 如果图片没获取完整，0.5秒后重试一下
-            if pathlib.Path(IMAGE_NAME).is_file():
-                if not verify_image(IMAGE_NAME):
-                    time.sleep(0.5)
-                    self.chose_event()
+            if not verify_image(IMAGE_NAME):
+                time.sleep(0.5)
+                self.chose_event()
             temp_img = read_image(IMAGE_NAME)
             each_ann_img = read_image(each)
             __score = ssim_score(img_1=temp_img, img_2=each_ann_img)
