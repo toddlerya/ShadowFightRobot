@@ -18,9 +18,8 @@ from apscheduler.schedulers.background import BlockingScheduler
 
 from config import IMAGE_NAME, ANNOTATION_IMAGE_PATH
 from config.tap_config import *
-from utils.trans import hex2dec
 from utils.operate import adb_shell, pull_screenshot
-from utils.image import read_image, ssim_score
+from utils.image import read_image, ssim_score, verify_image
 
 
 class EventManager:
@@ -105,6 +104,11 @@ class EventManager:
         similarity_img = ''
         for each in self.ann_images:
             temp_image_name = pathlib.Path(each).name
+            # 如果图片没获取完整，0.5秒后重试一下
+            if pathlib.Path(IMAGE_NAME).is_file():
+                if not verify_image(IMAGE_NAME):
+                    time.sleep(0.5)
+                    self.chose_event()
             temp_img = read_image(IMAGE_NAME)
             each_ann_img = read_image(each)
             __score = ssim_score(img_1=temp_img, img_2=each_ann_img)
@@ -141,10 +145,9 @@ def check_screenshot():
     except Exception as err:
         logger.error(f'无法执行adb shell截图: {err}')
     try:
-        Image.open('annotation_images/game_home_page.png').load()
+        Image.open(IMAGE_NAME).load()
     except Exception as err:
         logger.error(f'无法读取截图数据: {err}')
-        check_screenshot()
 
 
 def run():

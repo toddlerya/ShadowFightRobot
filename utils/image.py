@@ -10,16 +10,34 @@
 
 import cv2
 import numpy
+from PIL import Image
 from skimage import metrics
 from loguru import logger
 
 
-@logger.catch
+@logger.catch(reraise=True)
+def verify_image(image_path):
+    """
+    校验图片是否完整
+    """
+    status = False
+    try:
+        Image.open(image_path).verify()
+        status = True
+    except Exception as err:
+        logger.error(f'图片完整性验证失败: {err}')
+    return status
+
+
+
+
+
+@logger.catch(reraise=True)
 def read_image(image_path):
     return cv2.imread(image_path)
 
 
-@logger.catch
+@logger.catch(reraise=True)
 def mean_hash(img: numpy.ndarray) -> str:
     """
     均值哈希，值越小，相似度越高
@@ -48,6 +66,7 @@ def mean_hash(img: numpy.ndarray) -> str:
     return hash_str
 
 
+@logger.catch(reraise=True)
 def different_hash(img: numpy.ndarray) -> str:
     """
     差值哈希算法，值越小，相似度越高
@@ -68,6 +87,7 @@ def different_hash(img: numpy.ndarray) -> str:
     return hash_str
 
 
+@logger.catch(reraise=True)
 def perceptual_hash(img: numpy.ndarray) -> str:
     """
     感知哈希算法，值越小，相似度越高
@@ -91,12 +111,14 @@ def perceptual_hash(img: numpy.ndarray) -> str:
     return ''.join([str(ele) for ele in __hash])
 
 
+@logger.catch(reraise=True)
 def perceptual_hash_similarity_score(img_1: numpy.ndarray, img_2: numpy.ndarray):
     """
     感知hash相似度
     """
 
 
+@logger.catch(reraise=True)
 def ssim_score(img_1: numpy.ndarray, img_2: numpy.ndarray):
     """
     结构相似度量
