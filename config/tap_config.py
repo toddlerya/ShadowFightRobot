@@ -71,5 +71,6 @@ annotation_event_map = {
     'end_fight_click_continue_legend.png': END_FIGHT_CLICK_CONTINUE_EVENT,
     'gold_detail_click_continue.png': GOLD_DETAILS_CONTINUE_EVENT,
     'receive_award_gold_click_continue.png': RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT,
-    'fighting.png': COMBO_EVENT
+    'fighting_1.png': COMBO_EVENT,
+    'fighting_2.png': COMBO_EVENT
 }
