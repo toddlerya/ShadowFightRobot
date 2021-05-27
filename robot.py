@@ -72,14 +72,14 @@ class EventManager:
             time.sleep(5)
         if event_name == '打开决斗':
             adb_shell(self.click_duel_button_event_cmd)
-            time.sleep(20)
+            time.sleep(15)
         if event_name == '开始战斗':
             adb_shell(self.start_fight_button_event_cmd)
-            time.sleep(5)
+            time.sleep(3)
             self.fight()
         if event_name == '结束战斗':
             adb_shell(self.end_fight_click_continue_event_cmd)
-            time.sleep(5)
+            time.sleep(3)
         if event_name == '展示金币明细':
             adb_shell(self.gold_details_click_continue_event_cmd)
         if event_name == '领取战斗金币奖励':
@@ -90,7 +90,7 @@ class EventManager:
     @logger.catch(reraise=True)
     def fight(self):
         logger.info('开始攻击')
-        for i in range(80):
+        for i in range(60):
             logger.info(f'第{i + 1}次攻击')
             adb_shell(self.combo_event_cmd)
             time.sleep(0.3)
