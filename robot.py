@@ -109,6 +109,12 @@ class EventManager:
                 time.sleep(0.5)
                 self.chose_event()
             temp_img = read_image(IMAGE_NAME)
+            for _ in range(10):
+                if temp_img is None:
+                    time.sleep(0.5)
+                    temp_img = read_image(IMAGE_NAME)
+                else:
+                    break
             each_ann_img = read_image(each)
             __score = ssim_score(img_1=temp_img, img_2=each_ann_img)
             logger.info(f'当前正在比对标注图片: {temp_image_name} {__score}')
