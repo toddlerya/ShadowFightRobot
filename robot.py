@@ -11,7 +11,6 @@ import time
 import glob
 import pathlib
 
-
 from loguru import logger
 from PIL import Image
 from apscheduler.schedulers.background import BlockingScheduler
@@ -56,7 +55,8 @@ class EventManager:
         self.combo_event_cmd = self.__set_long_tap_event(COMBO_EVENT['value'])
         self.end_fight_click_continue_event_cmd = self.__set_short_tap_event(END_FIGHT_CLICK_CONTINUE_EVENT['value'])
         self.gold_details_click_continue_event_cmd = self.__set_short_tap_event(GOLD_DETAILS_CONTINUE_EVENT['value'])
-        self.receive_award_gold_click_continue_event_cmd = self.__set_short_tap_event(RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT['value'])
+        self.receive_award_gold_click_continue_event_cmd = self.__set_short_tap_event(
+            RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT['value'])
         self.ann_images = glob.glob(f'{str(pathlib.Path(ANNOTATION_IMAGE_PATH).absolute())}/*.png')
 
     def sender(self, event_name):
@@ -93,7 +93,7 @@ class EventManager:
         for i in range(60):
             logger.info(f'第{i + 1}次攻击')
             adb_shell(self.combo_event_cmd)
-            time.sleep(0.3)
+            time.sleep(0.1)
 
     @logger.catch(reraise=True)
     def chose_event(self):
