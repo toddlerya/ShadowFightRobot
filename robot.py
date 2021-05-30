@@ -32,6 +32,7 @@ class EventManager:
         self.end_fight_click_continue_event_cmd = ''
         self.gold_details_click_continue_event_cmd = ''
         self.receive_award_gold_click_continue_event_cmd = ''
+        self.lose_fight_tip_click_continue_event_cmd = ''
         self.ann_images = list()
         self.running_event = None
 
@@ -57,6 +58,8 @@ class EventManager:
         self.gold_details_click_continue_event_cmd = self.__set_short_tap_event(GOLD_DETAILS_CONTINUE_EVENT['value'])
         self.receive_award_gold_click_continue_event_cmd = self.__set_short_tap_event(
             RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT['value'])
+        self.lose_fight_tip_click_continue_event_cmd = self.__set_short_tap_event(
+            LOSE_FIGHT_TIP_CLICK_CONTINUE_EVENT['value'])
         self.ann_images = glob.glob(f'{str(pathlib.Path(ANNOTATION_IMAGE_PATH).absolute())}/*.png')
 
     def sender(self, event_name):
@@ -86,6 +89,8 @@ class EventManager:
             adb_shell(self.receive_award_gold_click_continue_event_cmd)
         if event_name == '开始攻击':
             self.fight()
+        if event_name == '输了比赛':
+            adb_shell(self.lose_fight_tip_click_continue_event_cmd)
 
     @logger.catch(reraise=True)
     def fight(self):

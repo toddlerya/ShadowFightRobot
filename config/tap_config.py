@@ -22,6 +22,10 @@ button_points = {
     'end_fight_continue': {
         'x': 1980,
         'y': 960
+    },
+    'lose_fight_tip_continue': {
+        'x': 2177,
+        'y': 949
     }
 }
 
@@ -57,6 +61,11 @@ RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT = {
     'value': button_points['end_fight_continue']
 }
 
+LOSE_FIGHT_TIP_CLICK_CONTINUE_EVENT = {
+    'desc': '输了比赛',
+    'value': button_points['lose_fight_tip_continue']
+}
+
 
 annotation_event_map = {
     # 'thunder_wait_open_game.png': OPEN_GAME_EVENT,
@@ -72,5 +81,6 @@ annotation_event_map = {
     'gold_detail_click_continue.png': GOLD_DETAILS_CONTINUE_EVENT,
     'receive_award_gold_click_continue.png': RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT,
     'fighting_1.png': COMBO_EVENT,
-    'fighting_2.png': COMBO_EVENT
+    'fighting_2.png': COMBO_EVENT,
+    'lose_fight_tip_click_continue.png': LOSE_FIGHT_TIP_CLICK_CONTINUE_EVENT,
 }
