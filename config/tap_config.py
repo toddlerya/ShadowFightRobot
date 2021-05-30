@@ -26,6 +26,10 @@ button_points = {
     'lose_fight_tip_continue': {
         'x': 2177,
         'y': 949
+    },
+    'connect_error_continue': {
+        'x': 1588,
+        'y': 754
     }
 }
 
@@ -66,6 +70,11 @@ LOSE_FIGHT_TIP_CLICK_CONTINUE_EVENT = {
     'value': button_points['lose_fight_tip_continue']
 }
 
+CONNECT_ERROR_CLICK_CONTINUE_EVENT = {
+    'desc': '网络连接失败',
+    'value': button_points['connect_error_continue']
+}
+
 
 annotation_event_map = {
     # 'thunder_wait_open_game.png': OPEN_GAME_EVENT,
@@ -83,4 +92,5 @@ annotation_event_map = {
     'fighting_1.png': COMBO_EVENT,
     'fighting_2.png': COMBO_EVENT,
     'lose_fight_tip_click_continue.png': LOSE_FIGHT_TIP_CLICK_CONTINUE_EVENT,
+    'connect_error_click_continue.png': CONNECT_ERROR_CLICK_CONTINUE_EVENT
 }
