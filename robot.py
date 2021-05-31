@@ -61,8 +61,8 @@ class EventManager:
             RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT['value'])
         self.lose_fight_tip_click_continue_event_cmd = self.__set_short_tap_event(
             LOSE_FIGHT_TIP_CLICK_CONTINUE_EVENT['value'])
-        self.connect_error_click_continue_event_cmd = self.__set_short_tap_event(
-            CONNECT_ERROR_CLICK_CONTINUE_EVENT['value'])
+        # self.connect_error_click_continue_event_cmd = self.__set_short_tap_event(
+        #     CONNECT_ERROR_CLICK_CONTINUE_EVENT['value'])
         self.ann_images = glob.glob(f'{str(pathlib.Path(ANNOTATION_IMAGE_PATH).absolute())}/*.png')
 
     def sender(self, event_name):
@@ -94,8 +94,8 @@ class EventManager:
             self.fight()
         if event_name == '输了比赛':
             adb_shell(self.lose_fight_tip_click_continue_event_cmd)
-        if event_name == '网络连接失败':
-            adb_shell(self.connect_error_click_continue_event_cmd)
+        # if event_name == '网络连接失败':
+        #     adb_shell(self.connect_error_click_continue_event_cmd)
 
     @logger.catch(reraise=True)
     def fight(self):
