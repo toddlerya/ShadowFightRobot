@@ -174,7 +174,7 @@ def run():
     scheduler.add_job(
         pull_screenshot,
         trigger='interval',
-        seconds=2
+        seconds=1
     )
     scheduler.add_job(
         em.run_event,

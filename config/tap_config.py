@@ -91,6 +91,8 @@ annotation_event_map = {
     'receive_award_gold_click_continue.png': RECEIVE_AWARD_GOLD_CLICK_CONTINUE_EVENT,
     'fighting_1.png': COMBO_EVENT,
     'fighting_2.png': COMBO_EVENT,
+    'fighting_3.png': COMBO_EVENT,
+    'fighting_4.png': COMBO_EVENT,
     'lose_fight_tip_click_continue.png': LOSE_FIGHT_TIP_CLICK_CONTINUE_EVENT,
     'connect_error_click_continue.png': CONNECT_ERROR_CLICK_CONTINUE_EVENT
 }
