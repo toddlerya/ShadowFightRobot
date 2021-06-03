@@ -135,6 +135,14 @@ class EventManager:
         logger.info(f'推荐事件: {recommend_event["desc"]}, 匹配成功图片: {similarity_img}, 相似度: {max_score}')
         return recommend_event
 
+    @loader.catch(reraise=True)
+    def concurrent_chose_event(self):
+        """
+        并行选择事件加速加速加速
+        :return:
+        """
+        pass
+
     @logger.catch(reraise=True)
     def run_event(self):
         """
