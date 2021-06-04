@@ -12,6 +12,8 @@ import datetime
 import time
 import multiprocessing as mp
 
+from loguru import logger
+
 from config import IMAGE_NAME, ANNOTATION_IMAGE_PATH
 from utils.image import read_image, ssim_score, verify_image
 
@@ -65,22 +67,21 @@ def concurrent():
                 }
             }
         )
-    start_t = datetime.datetime.now()
+    logger.info(f'共{len(tasks)}个标注场景')
     cpu_count = int(mp.cpu_count())
-    print(f'cpu number: {cpu_count}')
+    logger.info(f'cpu number: {cpu_count}')
     pool = mp.Pool(cpu_count)
+    start_t = datetime.datetime.now()
     results = [pool.apply_async(calc_score, args=(ann_img_name, calc_data)) for ann_img_name, calc_data in
                tasks.items()]
     results = [p.get() for p in results]
-    end_t = datetime.datetime.now()
-    print(f'results: {results}')
     score_data = dict()
     [score_data.update(ele) for ele in results]
-    print(f'score_data: {score_data}')
     sort_score_data = sorted(score_data.items(), key=lambda x: x[1], reverse=True)
-    print(sort_score_data)
+    logger.info(f'推荐场景: {sort_score_data[0]}')
+    end_t = datetime.datetime.now()
     elapsed_sec = (end_t - start_t).total_seconds()
-    print("多进程计算 共消耗: " + "{:.2f}".format(elapsed_sec) + " 秒")
+    logger.info("多进程计算 共消耗: " + "{:.2f}".format(elapsed_sec) + " 秒")
 
 
 if __name__ == '__main__':
