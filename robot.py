@@ -10,6 +10,7 @@ import os
 import time
 import glob
 import pathlib
+import multiprocessing as mp
 
 from loguru import logger
 from PIL import Image
@@ -18,7 +19,7 @@ from apscheduler.schedulers.background import BlockingScheduler
 from config import IMAGE_NAME, ANNOTATION_IMAGE_PATH
 from config.tap_config import *
 from utils.operate import adb_shell, pull_screenshot
-from utils.image import read_image, ssim_score, verify_image
+from utils.image import read_image, ssim_score, verify_image, calc_score
 
 
 class EventManager:
@@ -35,7 +36,9 @@ class EventManager:
         self.lose_fight_tip_click_continue_event_cmd = ''
         self.connect_error_click_continue_event_cmd = ''
         self.ann_images = list()
+        self.all_ann_data = dict()
         self.running_event = None
+        self.pool = mp.Pool(int(mp.cpu_count()))
 
     @staticmethod
     def __set_short_tap_event(event):
@@ -64,6 +67,8 @@ class EventManager:
         # self.connect_error_click_continue_event_cmd = self.__set_short_tap_event(
         #     CONNECT_ERROR_CLICK_CONTINUE_EVENT['value'])
         self.ann_images = glob.glob(f'{str(pathlib.Path(ANNOTATION_IMAGE_PATH).absolute())}/*.png')
+        for ele in self.ann_images:
+            self.all_ann_data[pathlib.Path(ele).name] = read_image(ele)
 
     def sender(self, event_name):
         """
@@ -135,13 +140,44 @@ class EventManager:
         logger.info(f'推荐事件: {recommend_event["desc"]}, 匹配成功图片: {similarity_img}, 相似度: {max_score}')
         return recommend_event
 
-    @loader.catch(reraise=True)
+    @logger.catch(reraise=True)
     def concurrent_chose_event(self):
         """
         并行选择事件加速加速加速
         :return:
         """
-        pass
+        if not verify_image(IMAGE_NAME):
+            time.sleep(0.5)
+            self.concurrent_chose_event()
+        temp_img_data = read_image(IMAGE_NAME)
+        for _ in range(10):
+            if temp_img_data is None:
+                time.sleep(0.5)
+                temp_img_data = read_image(IMAGE_NAME)
+            else:
+                break
+        tasks = dict()
+        for k, v in self.all_ann_data.items():
+            tasks.update(
+                {
+                    k: {
+                        'ann_img_data': v,
+                        'temp_img_data': temp_img_data
+                    }
+                }
+            )
+        results = [self.pool.apply_async(calc_score, args=(ann_img_name, calc_data)) for ann_img_name, calc_data in
+                   tasks.items()]
+        results = [p.get() for p in results]
+        score_data = dict()
+        [score_data.update(ele) for ele in results]
+        sort_score_data = sorted(score_data.items(), key=lambda x: x[1], reverse=True)[0]
+        # 示例: sort_score_data = ('game_home_page.png', 0.5864819236539401)
+        similarity_img = sort_score_data[0]
+        max_score = sort_score_data[1]
+        recommend_event = annotation_event_map[similarity_img]
+        logger.info(f'推荐事件: {recommend_event["desc"]}, 匹配成功图片: {similarity_img}, 相似度: {max_score}')
+        return recommend_event
 
     @logger.catch(reraise=True)
     def run_event(self):
@@ -149,7 +185,8 @@ class EventManager:
         执行事件
         """
         logger.info('调度执行事件')
-        __event = self.chose_event()
+        # __event = self.chose_event()
+        __event = self.concurrent_chose_event()
         __event_desc = __event['desc']
         logger.info(f'开始执行事件: {__event_desc}')
         self.sender(__event_desc)

@@ -126,3 +126,17 @@ def ssim_score(img_1: numpy.ndarray, img_2: numpy.ndarray):
     """
     score = metrics.structural_similarity(im1=img_1, im2=img_2, multichannel=True)
     return score
+
+
+@logger.catch(reraise=True)
+def calc_score(ann_img_name, calc_data):
+    """
+    计算相似度得分
+    :param ann_img_name:
+    :param calc_data:
+    :return:
+    """
+    ann_img_data = calc_data['ann_img_data']
+    temp_img_data = calc_data['temp_img_data']
+    __score = ssim_score(img_1=ann_img_data, img_2=temp_img_data)
+    return {ann_img_name: __score}

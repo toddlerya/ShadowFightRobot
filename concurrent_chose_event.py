@@ -77,8 +77,8 @@ def concurrent():
     results = [p.get() for p in results]
     score_data = dict()
     [score_data.update(ele) for ele in results]
-    sort_score_data = sorted(score_data.items(), key=lambda x: x[1], reverse=True)
-    logger.info(f'推荐场景: {sort_score_data[0]}')
+    sort_score_data = sorted(score_data.items(), key=lambda x: x[1], reverse=True)[0]
+    logger.info(f'推荐场景: {sort_score_data}')
     end_t = datetime.datetime.now()
     elapsed_sec = (end_t - start_t).total_seconds()
     logger.info("多进程计算 共消耗: " + "{:.2f}".format(elapsed_sec) + " 秒")
