@@ -14,6 +14,8 @@ from PIL import Image
 from skimage import metrics
 from loguru import logger
 
+from config.tap_config import need_gray_image
+
 
 @logger.catch(reraise=True)
 def verify_image(image_path):
@@ -31,7 +33,12 @@ def verify_image(image_path):
 
 @logger.catch(reraise=True)
 def read_image(image_path):
-    return cv2.imread(image_path)
+    # 需要将图片处理为灰度图
+    if need_gray_image:
+        return cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    # 正常读取，不进行灰度处理
+    else:
+        return cv2.imread(image_path)
 
 
 @logger.catch(reraise=True)

@@ -5,6 +5,7 @@
 # @FileName : tap_config.py
 # @Project  : ShadowFightRobot
 
+need_gray_image = True
 
 button_points = {
     'open_fight': {
