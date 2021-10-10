@@ -33,7 +33,6 @@ def verify_image(image_path):
 
 @logger.catch(reraise=True)
 def read_image(image_path):
-    data = None
     # 需要将图片处理为灰度图
     if trans_mode == 'gray':
         data = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
@@ -42,7 +41,7 @@ def read_image(image_path):
         __gray_data = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
         threshold = 128
         data = cv2.threshold(__gray_data, threshold, 255, cv2.THRESH_BINARY)[1]
-    # 正常读取，不进行灰度处理
+    # 正常读取，不进行预处理
     else:
         data = cv2.imread(image_path)
     return data
