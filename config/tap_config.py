@@ -30,8 +30,8 @@ button_points = {
         'y': 949
     },
     'connect_error_continue': {
-        'x': 1588,
-        'y': 754
+        'x': 1600,
+        'y': 755
     }
 }
 
@@ -96,5 +96,7 @@ annotation_event_map = {
     'fighting_3.png': COMBO_EVENT,
     'fighting_4.png': COMBO_EVENT,
     'lose_fight_tip_click_continue.png': LOSE_FIGHT_TIP_CLICK_CONTINUE_EVENT,
-    'connect_error_click_continue.png': CONNECT_ERROR_CLICK_CONTINUE_EVENT
+    'connect_error_click_continue.png': CONNECT_ERROR_CLICK_CONTINUE_EVENT,
+    'after_fight_lose_server_connect_continue.png': CONNECT_ERROR_CLICK_CONTINUE_EVENT,
+    'no_connect_please_retry_click_continue.png': CONNECT_ERROR_CLICK_CONTINUE_EVENT,
 }
